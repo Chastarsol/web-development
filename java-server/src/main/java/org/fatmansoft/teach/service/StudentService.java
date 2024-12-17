@@ -27,7 +27,9 @@ public class StudentService {
         m.put("dept",p.getDept());
         m.put("card",p.getCard());
         String gender = p.getGender();
+
         m.put("gender",gender);
+
         m.put("genderName", ComDataUtil.getInstance().getDictionaryLabelByValue("XBM", gender)); //性别类型的值转换成数据类型名
         m.put("birthday", p.getBirthday());  //时间格式转换字符串
         m.put("email",p.getEmail());

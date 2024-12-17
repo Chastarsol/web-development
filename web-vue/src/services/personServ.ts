@@ -125,5 +125,5 @@ export async function dormitoryDelete(dormitoryId: number): Promise<DataResponse
 //获取宿舍基本信息后台数据请求方法
 export async function getDormitoryInfo(dormitoryId: number | null): Promise<[]> {
   const res = await generalRequest("/api/dormitory/getDormitoryInfo", {dormitoryId: dormitoryId,});
-  return res as [];
+  return res.data as [];
 }
