@@ -37,4 +37,16 @@ public class DormitoryController {
         List<Dormitory> sList = dormitoryRepository.findDormitoryListByNumName(door);
         return JsonConvertUtil.getDataListJson(sList);
     }
+    //根据宿舍Id返回整个宿舍学生
+    @PostMapping("/getStudentListByDormitoryId")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getDormitoryStudentInfo(@Valid @RequestBody DataRequest dataRequest) {
+        Integer dormitoryId = dataRequest.getInteger("dormitoryId");
+        if (dormitoryId== null) {
+            dormitoryId = 0;
+        }
+        List<Student> sList = dormitoryRepository.findstudentListByDormitoryId(dormitoryId);
+        return JsonConvertUtil.getDataObjectJson(sList);
+
+    }
 }

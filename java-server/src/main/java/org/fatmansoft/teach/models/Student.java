@@ -21,6 +21,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentId;
+    private Integer dormitoryId;
 
     @OneToOne
     @JoinColumn(name="person_id")
