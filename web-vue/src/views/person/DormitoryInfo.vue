@@ -97,25 +97,47 @@
       };
     },
     // 页面加载函数
-    async created() {
-        // 获取路由参数
-        const res = this.$route.query.dormitoryId;
-        if (res != null) {
-         this.dormitoryId = parseInt(res.toString());
-        }
-        // 获取信息
-        if (this.dormitoryId != null) {
-          this.dataList = await getDormitoryInfo(this.dormitoryId);
-     }
-  },
-    
+    created() {
+        this.doQuery()
+    },
 
     methods: {
       async doQuery() {
-        this.dataList = await getDormitoryInfo(this.dormitoryId)
-      }
-    },
+        // 获取路由参数
+        const res = this.$route.query.dormitoryId;
+        console.log('获取的宿舍ID:', res);
+        if (res != null) {
+         this.dormitoryId = parseInt(res.toString())
+        }
 
-  })
+        // 获取信息
+        if (this.dormitoryId != null) {
+          this.dataList = await getDormitoryInfo(this.dormitoryId)
+          console.log('获取的数据列表:', this.dataList);
+        }
+      },
+
+      async editItem(studentId : number) {
+        // 获取路由参数
+        const res = this.$route.query.dormitoryId;
+        console.log('获取的宿舍ID:', res);
+        if (res != null) {
+         this.dormitoryId = parseInt(res.toString())
+        }
+
+        // 获取信息
+        if (this.dormitoryId != null) {
+          this.dataList = await getDormitoryInfo(this.dormitoryId)
+          console.log('获取的数据列表:', this.dataList);
+        }
+      },
+      
+      async deleteItem(studentId :number) {
+
+      },
+
+    },
+  },
+)
 </script>
 
