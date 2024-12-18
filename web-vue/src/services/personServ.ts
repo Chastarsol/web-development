@@ -4,6 +4,7 @@ import {
   type StudentItem,
   type FamilyMemberItem,
   type TeacherItem,
+  DormitoryItem,
 } from "~/models/general";
 //获取学生列表分页数据后台数据请求方法
 export async function getStudentPageData(
@@ -126,4 +127,16 @@ export async function dormitoryDelete(dormitoryId: number): Promise<DataResponse
 export async function getDormitoryInfo(dormitoryId: number | null): Promise<[]> {
   const res = await generalRequest("/api/dormitory/getDormitoryInfo", {dormitoryId: dormitoryId,});
   return res.data as [];
+}
+
+//保存宿舍基本信息后台数据请求方法
+export async function dormitoryEditSave(
+  dormitoryId: number,
+  form: DormitoryItem
+): Promise<DataResponse> {
+  const res = await generalRequest("/api/dormitory/dormitoryEditSave", {
+    dormitoryId: dormitoryId,
+    form: form,
+  });
+  return res as DataResponse;
 }

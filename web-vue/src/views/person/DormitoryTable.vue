@@ -113,9 +113,9 @@ export default defineComponent({
     async queryOne(id : number) {
       this.dataList = await getDormitoryList(id)
     },
-    //添加宿舍，跳转到宿舍信息界面
+    //添加宿舍，跳转到宿舍添加界面
     addItem() {
-      router.push({ path: "/DormitoryInfo" });
+      router.push({ path: "/DormitoryAdd" });
     },
     //编辑宿舍,跳转到宿舍信息页面
     editItem(dormitoryId: number) {
@@ -137,6 +137,7 @@ export default defineComponent({
       } else {
         message(this, res.msg);
       }
+      this.queryAll();
     },
   },
   created() {

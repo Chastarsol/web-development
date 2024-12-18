@@ -5,7 +5,7 @@
       <div class="base_title">宿舍信息</div>
     </div>
 
-    <el-table :data="dataList" border style="width: 100%">
+    <el-table :data="studentDataList" border style="width: 100%">
         <el-table-column label="序号" fixed="left" width="50" color="black">
           <template v-slot="scope">
             {{ scope.$index + 1 }}
@@ -81,25 +81,53 @@
 
     </el-table>
 
+    <div class="form-div" style="margin-top: 5px">
+      <table class="content">
+        
+        <tr>
+          <td colspan="1" style="text-align: right">楼号</td>
+          <td colspan="1"><input v-model="form.building" style="width: 97%" /></td>
+        </tr>
+        <tr>
+          <td colspan="1" style="text-align: right">楼层</td>
+          <td colspan="1"><input v-model="form.floor" style="width: 97%" /></td>
+        </tr>
+        <tr>
+          <td colspan="1" style="text-align: right">门牌号</td>
+          <td colspan="1"><input v-model="form.dormitoryId" style="width: 97%" /></td>
+        </tr>
+        <tr>
+          <td colspan="1" style="text-align: right">年级</td>
+          <td colspan="1"><input v-model="form.grade" style="width: 97%" /></td>
+        </tr>
+        
+        <tr>
+          <td colspan="2">
+            <button class="commButton" @click="submit">提交</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { type StudentItem } from "~/models/general";
+  import { DormitoryItem, type StudentItem } from "~/models/general";
   import { getDormitoryInfo } from "~/services/personServ";
   import { message, messageConform } from "~/tools/messageBox";
   import { getStudentPageData, studentDelete } from "~/services/personServ";
   import router from "~/router";
-
+  import { dormitoryEditSave } from "~/services/personServ";
 
 
   export default defineComponent({
     data () {
       return {
         dormitoryId: 0 as number,
-        dataList: [] as StudentItem[],
-
+        studentDataList: [] as StudentItem[],
+        form: {} as DormitoryItem,
       };
     },
     // 页面加载函数
@@ -118,11 +146,21 @@
 
         // 获取信息
         if (this.dormitoryId != null) {
-          this.dataList = await getDormitoryInfo(this.dormitoryId)
-          console.log('获取的数据列表:', this.dataList);
+          this.studentDataList = await getDormitoryInfo(this.dormitoryId)
+          console.log('获取的数据列表:', this.studentDataList);
         }
       },
-//编辑学生信息
+      // 提交表单
+      async submit() {
+        const res = await dormitoryEditSave(this.dormitoryId, this.form);
+
+        if (res.code == 0) {
+          router.push({ path: "/teacher-panel" });
+        } else {
+          alert(res.msg);
+        }
+     },
+      //编辑学生信息
       async editItem(studentId : number) {
         router.push({
         path: "/StudentInfo",

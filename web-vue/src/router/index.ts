@@ -106,6 +106,12 @@ const routes = [
     name: "DormitoryInfo",
     component: () => import("~/views/person/DormitoryInfo.vue"),
   },
+  //宿舍增加
+  {
+    path: "/DormitoryAdd",
+    name: "DormitoryAdd",
+    component: () => import("~/views/person/DormitoryAdd.vue"),
+  },
   //竞赛管理
   {
     path: "/competition-panel",
