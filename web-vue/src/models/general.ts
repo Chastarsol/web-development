@@ -115,24 +115,7 @@ export interface ScoreItem {
   credit: number;
   mark: number;
 }
-//用于学生数据信息的定义
-export interface StudentItem {
-  studentId: number;
-  personId: number;
-  num: string;
-  name: string;
-  dept: string;
-  major: string;
-  className: string;
-  card: string;
-  gender: string;
-  genderName: string;
-  birthday: string;
-  email: string;
-  phone: string;
-  address: string;
-  dormitoryId: number;
-}
+
 //用于课程数据信息的定义
 export interface CourseItem {
   courseId: number;
@@ -238,6 +221,8 @@ export interface FamilyMemberItem {
   unit: string;
 }
 
+
+
 export interface PersonItem {
   personId: number;
   num: string;
@@ -250,6 +235,25 @@ export interface PersonItem {
   email: string;
   phone: string;
   address: string;
+}
+
+//用于学生数据信息的定义
+export interface StudentItem {
+  studentId: number;
+  personId: number;
+  num: string;
+  name: string;
+  dept: string;
+  major: string;
+  className: string;
+  card: string;
+  gender: string;
+  genderName: string;
+  birthday: string;
+  email: string;
+  phone: string;
+  address: string;
+  dormitoryId: number;
 }
 
 //用于教师数据信息的定义
