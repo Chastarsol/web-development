@@ -20,8 +20,6 @@ public class Dormitory {
     @Column(name = "dormitory_id")
     private Integer dormitoryId;
 
-    private String door;
-
     private String building;
 
     private String floor;

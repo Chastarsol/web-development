@@ -10,8 +10,8 @@
         <el-button class="commButton" @click="addItem()">添加</el-button>
       </div>
       <div class="query_right">
-        <el-input v-model="door">门牌号</el-input>
-        <el-button class="commButton" @click="doQuery()">查询</el-button>
+        <el-input v-model="id">门牌号</el-input>
+        <el-button class="commButton" @click="queryOne(id)">查询</el-button>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
 
         <el-table-column label="门牌号" width="180">
           <template v-slot="scope">
-            {{ scope.row.door }}
+            {{ scope.row.dormitoryId }}
           </template>
         </el-table-column>
 
@@ -71,7 +71,7 @@
             <el-button class="commButton" @click="editItem(scope.row.dormitoryId)"
               >编辑</el-button
             >
-            <el-button class="commButton" @click="deleteItem(scope.$index)"
+            <el-button class="commButton" @click="deleteItem(scope.row.dormitoryId)"
               >删除</el-button
             >
           </template>
@@ -93,11 +93,12 @@ import { dormitoryDelete } from "~/services/personServ";
 import { type DormitoryItem } from "~/models/general";
 import { message, messageConform } from "~/tools/messageBox";
 import router from "~/router";
+import { getDefaultResultOrder } from "dns";
 
 export default defineComponent({
   data() {
     return {
-      door: "",
+      id : 0 as number,
       dataList: [] as DormitoryItem[],
 
     };
@@ -105,8 +106,12 @@ export default defineComponent({
 
   
   methods: {
-    async doQuery() {
-      this.dataList = await getDormitoryList(this.door);
+    //查询所有宿舍信息
+    async queryAll() {
+      this.dataList = await getDormitoryList(null);
+    },
+    async queryOne(id : number) {
+      this.dataList = await getDormitoryList(id)
     },
     //添加宿舍，跳转到宿舍信息界面
     addItem() {
@@ -120,24 +125,22 @@ export default defineComponent({
       });
     },
     //删除宿舍
-    async deleteItem(index: number) {
+    async deleteItem(dormitoryId: number) {
       const result = await messageConform("确认删除宿舍吗?");
       if (!result) {
         return;
       }
-      console.log(this.dataList[index]);
-      const res = await dormitoryDelete(this.dataList[index].dormitoryId);
+      //console.log(this.dataList[index]);
+      const res = await dormitoryDelete(dormitoryId);
       if (res.code == 0) {
         message(this, "删除成功");
-        this.dataList.splice(index, 1);
       } else {
         message(this, res.msg);
       }
     },
   },
-
   created() {
-    this.doQuery();
+    this.queryAll();
   },
 });
 </script>

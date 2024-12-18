@@ -106,10 +106,10 @@ export async function teacherDelete(teacherId: number): Promise<DataResponse> {
 
 //以下是自己实现的方法
 
-//获取宿舍列表数据后台数据请求方法
-export async function getDormitoryList(door: String | null): Promise<[]> {
+//根据宿舍id获取宿舍列表数据后台数据请求方法
+export async function getDormitoryList(dormitoryId: number | null): Promise<[]> {
   const res = await generalRequest("/api/dormitory/getDormitoryList", {
-    door: door,
+    dormitoryId: dormitoryId,
   });
   return res as [];
 }

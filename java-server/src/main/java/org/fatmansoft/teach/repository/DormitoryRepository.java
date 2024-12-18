@@ -9,10 +9,18 @@ import java.util.List;
 
 public interface DormitoryRepository extends JpaRepository<Dormitory, Integer> {
 
-    @Query(value = "from Dormitory d where (?1 is null or ?1 = '' or d.door =?1)")
-    List<Dormitory> findDormitoryListByNumName(String door);
+    //根据id查询单个宿舍
+    @Query(value = "from Dormitory d where d.dormitoryId = ?1")
+    List<Dormitory> findDormitoryListByDormitoryId(Integer dormitoryId);
+
+    //查询所有宿舍
+    @Query(value = "from Dormitory d where ?1 = null")
+    List<Dormitory> findAllDormitoryList(Integer dormitoryId);
+
+
     @Query(" FROM Student s WHERE s.dormitoryId = :dormitoryId")
     List<Student> findstudentListByDormitoryId(Integer dormitoryId);
+
     @Query(nativeQuery = true, value = "DELETE FROM dormitory WHERE dormitory_id = :dormitoryId")
     void deleteDormitoryByDormitoryId(Integer dormitoryId);
 

@@ -49,22 +49,22 @@ public class TeacherController {
     @PreAuthorize(" hasRole('ADMIN')")
     public DataResponse teacherDelete(@Valid @RequestBody DataRequest dataRequest) {
         Integer teacherId = dataRequest.getInteger("teacherId");  //获取student_id值
-        Teacher s = null;
+        Teacher t = null;
         Optional<Teacher> op;
         if (teacherId != null) {
             op = teacherRepository.findById(teacherId);   //查询获得实体对象
             if (op.isPresent()) {
-                s = op.get();
+                t = op.get();
             }
         }
-        if (s != null) {
-            Optional<User> uOp = userRepository.findByPersonPersonId(s.getPerson().getPersonId()); //查询对应该学生的账户
+        if (t != null) {
+            Optional<User> uOp = userRepository.findByPersonPersonId(t.getPerson().getPersonId()); //查询对应该学生的账户
             if (uOp.isPresent()) {
-                userRepository.delete(uOp.get()); //删除对应该学生的账户
+                userRepository.delete(uOp.get()); //删除对应该老师的账户
             }
-            Person p = s.getPerson();
-            teacherRepository.delete(s);    //首先数据库永久删除学生信息
-            personRepository.delete(p);   // 然后数据库永久删除学生信息
+            Person p = t.getPerson();
+            teacherRepository.delete(t);    //老师表删除信息
+            personRepository.delete(p);   // 然后person表删除信息
         }
         return CommonMethod.getReturnMessageOK();  //通知前端操作正常
     }

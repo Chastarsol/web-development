@@ -43,15 +43,24 @@ public class DormitoryController {
     private UserTypeRepository userTypeRepository; //用户类型数据操作自动注入
 
 
+    //根据宿舍id查询宿舍，id若为null则查询所有宿舍
     @PostMapping("/getDormitoryList")
     @PreAuthorize("hasRole('ADMIN')")
     public String  getDormitoryList(@Valid @RequestBody DataRequest dataRequest) {
-        String door = dataRequest.getString("door");
-        if(door == null)
-            door ="";
-        List<Dormitory> sList = dormitoryRepository.findDormitoryListByNumName(door);
+        Integer dormitoryId = dataRequest.getInteger("dormitoryId");
+
+        //如果传入的id为null，则查询所有宿舍
+        List<Dormitory> sList;
+        if(dormitoryId == null) {
+            sList = dormitoryRepository.findAllDormitoryList(dormitoryId);
+        } else {
+            //否则根据该id查询宿舍
+            sList = dormitoryRepository.findDormitoryListByDormitoryId(dormitoryId);
+        }
         return JsonConvertUtil.getDataListJson(sList);
     }
+
+
     //根据宿舍Id返回整个宿舍学生
     @PostMapping("/getDormitoryInfo")
     @PreAuthorize("hasRole('ADMIN')")
@@ -81,17 +90,35 @@ public class DormitoryController {
 
     }
 
-    @PostMapping("/teacherDelete")
+    @PostMapping("/dormitoryDelete")
     @PreAuthorize(" hasRole('ADMIN')")//删除宿舍
     public DataResponse dormitoryDelete(@Valid @RequestBody DataRequest dataRequest) {
-        Integer dormitoryId = dataRequest.getInteger("dormitoryId");  //获取student_id值
-        List<Student> list = dormitoryRepository.findstudentListByDormitoryId(dormitoryId);
-        for (int i = 0; i < list.size(); i++) {
-            Student s = list.get(i);
-            Person p = s.getPerson();
-            studentRepository.delete(s);
-            personRepository.delete(p);
+        Integer dormitoryId = dataRequest.getInteger("dormitoryId");  //获取宿舍id值、
+        Dormitory d = null;
+        Optional<Dormitory> op;
+        if (dormitoryId != null) {
+            op = dormitoryRepository.findById(dormitoryId);   //查询获得实体对象
+            if (op.isPresent()) {
+                d = op.get();
+            }
         }
+        //删除该宿舍内的学生
+        if (d != null) {
+            List<Student> list = dormitoryRepository.findstudentListByDormitoryId(dormitoryId);
+            for (int i = 0; i < list.size(); i++) {
+                Student s = list.get(i);
+
+                Optional<User> uOp = userRepository.findByPersonPersonId(s.getPerson().getPersonId()); //查询对应该学生的账户
+                if (uOp.isPresent()) {
+                    userRepository.delete(uOp.get()); //删除对应该学生的账户
+                }
+
+                Person p = s.getPerson();
+                studentRepository.delete(s);
+                personRepository.delete(p);
+            }
+        }
+        //删除该宿舍
         dormitoryRepository.deleteDormitoryByDormitoryId(dormitoryId);
         return CommonMethod.getReturnMessageOK();  //通知前端操作正常
     }

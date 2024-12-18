@@ -95,7 +95,7 @@
         </el-table-column>
         <el-table-column label="宿舍" color="black" align="center">
           <template v-slot="scope">
-            {{ scope.row.door }}
+            {{ scope.row.dormitoryId }}
           </template>
         </el-table-column>
         <el-table-column label="操作" color="black" align="center" width="260">

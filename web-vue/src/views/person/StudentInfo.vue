@@ -75,7 +75,7 @@
         <tr>
           <td colspan="1" style="text-align: right">宿舍</td>
           <td colspan="1">
-            <input v-model="form.door" style="width: 97%" />
+            <input v-model="form.dormitoryId" style="width: 97%" />
           </td>
         </tr>
         <tr>

@@ -21,7 +21,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentId;
-    private String door;
+    private Integer dormitoryId;
 
     @OneToOne
     @JoinColumn(name="person_id")
@@ -42,12 +42,12 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public String getDoor() {
-        return door;
+    public Integer getDormitoryId() {
+        return dormitoryId;
     }
 
-    public void setDoor(String door) {
-        this.door = door;
+    public void setDormitoryId(Integer dormitoryId) {
+        this.dormitoryId = dormitoryId;
     }
 
     public Person getPerson() {
