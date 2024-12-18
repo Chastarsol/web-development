@@ -121,4 +121,49 @@ public class DormitoryController {
         return CommonMethod.getReturnMessageOK();  //通知前端操作正常
     }
 
+    @PostMapping("/dormitoryEditSave")
+    @PreAuthorize("hasRole('ADMIN')")
+    public DataResponse dormitoryEditSave(@Valid @RequestBody DataRequest dataRequest) {
+
+        Map form = dataRequest.getMap("form"); //参数获取Map对象
+        Integer dormitoryId= CommonMethod.getInteger(form, "dormitoryId");
+        System.out.println("this is id:" + dormitoryId);
+
+        Dormitory d = null;
+        Optional<Dormitory> op;
+        if (dormitoryId != null) {
+            op = dormitoryRepository.findById(dormitoryId);  //查询对应数据库中主键为id的值的实体对象
+            if (op.isPresent()) {
+                d = op.get();
+            }
+        }
+        //Integerdormitory_Id = CommonMethod.getString(form, "dormitoryId");
+        String building = CommonMethod.getString(form, "building");
+        String floor = CommonMethod.getString(form, "floor");
+        String grade = CommonMethod.getString(form, "grade");
+        // 其他宿舍属性获取，比如宿舍所在楼层等类似属性
+
+        if (d == null) {
+            // 如果宿舍不存在，则创建新宿舍
+            d = new Dormitory();
+            d.setDormitoryId(dormitoryId);
+            d.setBuilding(building);
+            d.setFloor(floor);
+            d.setGrade(grade);
+            
+            // 设置其他初始属性
+            dormitoryRepository.saveAndFlush(d);
+
+        } else {
+            // 如果宿舍存在，更新已有宿舍信息
+            d.setDormitoryId(dormitoryId);
+            d.setBuilding(building);
+            d.setFloor(floor);
+            d.setGrade(grade);
+            // 更新其他属性
+            dormitoryRepository.saveAndFlush(d);
+        }
+        return CommonMethod.getReturnData(d.getDormitoryId());  // 将dormitoryId返回前端
+    }
+
 }

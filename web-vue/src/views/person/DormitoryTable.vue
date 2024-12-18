@@ -65,7 +65,7 @@
         <!--表格最右侧的操作按钮-->
         <el-table-column label="操作" color="black" align="center" width="230">
           <template v-slot="scope">
-            <el-button class="commButton" @click="editItem(scope.row.dormitoryId)"
+            <el-button class="commButton" @click="lookItem(scope.row.dormitoryId)"
               >基本信息</el-button
             >
             <el-button class="commButton" @click="editItem(scope.row.dormitoryId)"
@@ -110,9 +110,17 @@ export default defineComponent({
     async queryAll() {
       this.dataList = await getDormitoryList(null);
     },
+    //查询一个宿舍信息
     async queryOne(id : number) {
       this.dataList = await getDormitoryList(id)
     },
+    async lookItem(dormitoryId : number) {
+      router.push({
+        path: "/DormitoryInfo",
+        query: { dormitoryId: dormitoryId },
+      });
+    },
+
     //添加宿舍，跳转到宿舍添加界面
     addItem() {
       router.push({ path: "/DormitoryAdd" });
@@ -120,7 +128,7 @@ export default defineComponent({
     //编辑宿舍,跳转到宿舍信息页面
     editItem(dormitoryId: number) {
       router.push({
-        path: "/DormitoryInfo",
+        path: "/DormitoryAdd",
         query: { dormitoryId: dormitoryId },
       });
     },

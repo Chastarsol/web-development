@@ -130,12 +130,8 @@ export async function getDormitoryInfo(dormitoryId: number | null): Promise<[]> 
 }
 
 //保存宿舍基本信息后台数据请求方法
-export async function dormitoryEditSave(
-  dormitoryId: number,
-  form: DormitoryItem
-): Promise<DataResponse> {
+export async function dormitoryEditSave(form: DormitoryItem): Promise<DataResponse> {
   const res = await generalRequest("/api/dormitory/dormitoryEditSave", {
-    dormitoryId: dormitoryId,
     form: form,
   });
   return res as DataResponse;
