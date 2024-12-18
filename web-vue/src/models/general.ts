@@ -131,7 +131,7 @@ export interface StudentItem {
   email: string;
   phone: string;
   address: string;
-  dormitoryId: number;
+  door: number;
 }
 //用于课程数据信息的定义
 export interface CourseItem {
@@ -266,5 +266,6 @@ export interface DormitoryItem {
   building: string;//几号楼
   floor: string;//楼层
   grade: string;//年级
-  count: string;//宿舍人数
+  
+  //count: string;//宿舍人数
 }

@@ -29,5 +29,4 @@ public class Dormitory {
     private String grade;
 
 
-
 }

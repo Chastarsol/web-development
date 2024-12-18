@@ -247,7 +247,7 @@ public class StudentController {
         s.setClassName(CommonMethod.getString(form, "className"));
 
         //******
-        s.setDormitoryId(CommonMethod.getInteger(form, "dormitoryId"));
+        s.setDoor(CommonMethod.getString(form, "door"));
         //******
 
         studentRepository.save(s);  //修改保存学生信息

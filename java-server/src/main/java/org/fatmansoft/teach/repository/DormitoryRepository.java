@@ -13,7 +13,6 @@ public interface DormitoryRepository extends JpaRepository<Dormitory, Integer> {
     List<Dormitory> findDormitoryListByNumName(String door);
     @Query(" FROM Student s WHERE s.dormitoryId = :dormitoryId")
     List<Student> findstudentListByDormitoryId(Integer dormitoryId);
-
     @Query(nativeQuery = true, value = "DELETE FROM dormitory WHERE dormitory_id = :dormitoryId")
     void deleteDormitoryByDormitoryId(Integer dormitoryId);
 

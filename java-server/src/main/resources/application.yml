@@ -4,10 +4,10 @@ bezkoder:
     jwtSecret: bezKoderSecretKey
     jwtExpirationMs: 86400000
 server:
-  port: 9091
+  port: 9090
 spring:
   datasource:
-    url: jdbc:sqlite:C:/Users/wd/Desktop/webdevelopment/web-development/data.db
+    url: jdbc:sqlite:D:/OneDrive/Desktop/web-development/web-development/data.db
     driver-class-name: org.sqlite.JDBC
     username: admin
     password: admin
