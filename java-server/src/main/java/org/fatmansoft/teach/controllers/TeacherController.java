@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.*;
 
+import static jdk.internal.org.jline.utils.Colors.s;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/teacher")
@@ -162,6 +164,18 @@ public class TeacherController {
         s.setDegree(CommonMethod.getString(form, "degree"));
         teacherRepository.save(s);  //修改保存学生信息
         return CommonMethod.getReturnData(s.getTeacherId());  // 将studentId返回前端
+    }
+
+    @PostMapping("")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    public DataResponse getTeacherIntroduceData(@Valid @RequestBody DataRequest dataRequest) {
+       Integer teacherId = dataRequest.getInteger("teacherId");
+        Optional<Teacher> sOp = teacherRepository.findTeacherListById(teacherId);  // 查询获得 Student对象
+        if (!sOp.isPresent())
+            return CommonMethod.getReturnMessageError("老师不存在！");
+        Teacher t = sOp.get();
+
+        return CommonMethod.getReturnData(t);//将前端所需数据保留Map对象里，返还前端
     }
 
 }
