@@ -93,6 +93,11 @@
             {{ scope.row.address }}
           </template>
         </el-table-column>
+        <el-table-column label="宿舍" color="black" align="center">
+          <template v-slot="scope">
+            {{ scope.row.dormitoryId }}
+          </template>
+        </el-table-column>
         <el-table-column label="操作" color="black" align="center" width="260">
           <template v-slot="scope">
             <el-button class="commButton" @click="editItem(scope.row.studentId)">基本信息</el-button>

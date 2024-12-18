@@ -178,6 +178,8 @@ public class StudentController {
     public DataResponse studentEditSave(@Valid @RequestBody DataRequest dataRequest) {
         Integer studentId = dataRequest.getInteger("studentId");
         Map form = dataRequest.getMap("form"); //参数获取Map对象
+
+
         String num = CommonMethod.getString(form, "num");  //Map 获取属性的值
         Student s = null;
         Person p;
@@ -202,6 +204,7 @@ public class StudentController {
             p.setNum(num);
             p.setType("1");
             personRepository.saveAndFlush(p);  //插入新的Person记录
+
             String password = encoder.encode("123456");
             u = new User();
             u.setPerson(p);
@@ -211,9 +214,11 @@ public class StudentController {
             u.setCreateTime(DateTimeTool.parseDateTime(new Date()));
             u.setCreatorId(CommonMethod.getUserId());
             userRepository.saveAndFlush(u); //插入新的User记录
+
             s = new Student();   // 创建实体对象
             s.setPerson(p);
             studentRepository.saveAndFlush(s);  //插入新的Student记录
+
             isNew = true;
         } else {
             p = s.getPerson();
@@ -240,6 +245,11 @@ public class StudentController {
         personRepository.save(p);  // 修改保存人员信息
         s.setMajor(CommonMethod.getString(form, "major"));
         s.setClassName(CommonMethod.getString(form, "className"));
+
+        //******
+        s.setDormitoryId(CommonMethod.getInteger(form, "dormitoryId"));
+        //******
+
         studentRepository.save(s);  //修改保存学生信息
         systemService.modifyLog(s,isNew);
         return CommonMethod.getReturnData(s.getStudentId());  // 将studentId返回前端

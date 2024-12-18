@@ -42,6 +42,14 @@ public class Student {
         this.studentId = studentId;
     }
 
+    public Integer getDormitoryId() {
+        return dormitoryId;
+    }
+
+    public void setDormitoryId(Integer dormitoryId) {
+        this.dormitoryId = dormitoryId;
+    }
+
     public Person getPerson() {
         return person;
     }

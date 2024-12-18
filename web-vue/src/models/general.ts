@@ -131,6 +131,7 @@ export interface StudentItem {
   email: string;
   phone: string;
   address: string;
+  dormitoryId: number;
 }
 //用于课程数据信息的定义
 export interface CourseItem {

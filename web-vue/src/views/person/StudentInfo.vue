@@ -73,6 +73,12 @@
           </td>
         </tr>
         <tr>
+          <td colspan="1" style="text-align: right">宿舍</td>
+          <td colspan="1">
+            <input v-model="form.dormitoryId" style="width: 97%" />
+          </td>
+        </tr>
+        <tr>
           <td colspan="2">
             <button class="commButton" @click="submit">提交</button>
           </td>
