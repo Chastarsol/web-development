@@ -35,13 +35,3 @@ export async function uploadPhoto(remoteFile: string, file: any): Promise<any> {
   );
   return res as DataResponse;
 }
-
-//获取老师个人简介信息后台数据请求方法
-export async function getTeacherIntroduceData(
-  teacherId: number | null
-): Promise<DataResponse> {
-  const res = await generalRequest("/api/teacher/getTeacherIntroduceData", {
-    teacherId: teacherId,
-  });
-  return res as DataResponse;
-}
