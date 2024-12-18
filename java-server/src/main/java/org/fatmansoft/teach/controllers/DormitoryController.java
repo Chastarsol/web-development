@@ -107,19 +107,17 @@ public class DormitoryController {
             List<Student> list = dormitoryRepository.findstudentListByDormitoryId(dormitoryId);
             for (int i = 0; i < list.size(); i++) {
                 Student s = list.get(i);
-
                 Optional<User> uOp = userRepository.findByPersonPersonId(s.getPerson().getPersonId()); //查询对应该学生的账户
                 if (uOp.isPresent()) {
                     userRepository.delete(uOp.get()); //删除对应该学生的账户
                 }
-
                 Person p = s.getPerson();
                 studentRepository.delete(s);
                 personRepository.delete(p);
             }
         }
         //删除该宿舍
-        dormitoryRepository.deleteDormitoryByDormitoryId(dormitoryId);
+        dormitoryRepository.delete(d);
         return CommonMethod.getReturnMessageOK();  //通知前端操作正常
     }
 
