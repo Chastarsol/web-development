@@ -79,5 +79,17 @@ public class DormitoryController {
         return CommonMethod.getReturnData(dataList);
 
     }
+    @PostMapping("/teacherDelete")
+    @PreAuthorize(" hasRole('ADMIN')")//删除宿舍
+    public DataResponse dormitoryDelete(@Valid @RequestBody DataRequest dataRequest) {
+        Integer dormitoryId = dataRequest.getInteger("dormitoryId");  //获取student_id值
+        List<Student> list = dormitoryRepository.findstudentListByDormitoryId(dormitoryId);
+        for (int i = 0; i < list.size(); i++) {
+            Student s = list.get(i);
+            studentRepository.delete(s);
+        }
+        dormitoryRepository.deleteDormitoryByDormitoryId(dormitoryId);
+        return CommonMethod.getReturnMessageOK();  //通知前端操作正常
+    }
 
 }
