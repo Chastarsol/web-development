@@ -56,12 +56,6 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="人数" width="180">
-          <template v-slot="scope">
-            {{ scope.row.count }}
-          </template>
-        </el-table-column>
-
         <el-table-column label="年级" width="180">
           <template v-slot="scope">
             {{ scope.row.grade }}

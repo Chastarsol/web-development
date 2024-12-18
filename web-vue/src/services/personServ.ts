@@ -108,9 +108,7 @@ export async function teacherDelete(teacherId: number): Promise<DataResponse> {
 
 //获取宿舍列表数据后台数据请求方法
 export async function getDormitoryList(door: String | null): Promise<[]> {
-  const res = await generalRequest("/api/dormitory/getDormitoryList", {
-    door: door,
-  });
+  const res = await generalRequest("/api/dormitory/getDormitoryList", {door: door,});
   return res as [];
 }
 

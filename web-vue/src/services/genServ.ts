@@ -14,6 +14,10 @@ export async function generalRequest(
       headers: getAuthHeader(),
     }
   );
+
+  console.log("res is" );
+  console.log(res );
+
   if (res.status != 200) {
     console.log("Error: " + res.status);
     return;

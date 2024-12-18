@@ -72,8 +72,9 @@
 
       <el-table-column label="操作" color="black" align="center" width="260">
           <template v-slot="scope">
+            <!--编辑学生信息-->
             <el-button class="commButton" @click="editItem(scope.row.studentId)">编辑</el-button>
-
+            <!--删除学生信息-->
             <el-button class="commButton" @click="deleteItem(scope.row.studentId)">删除</el-button>
             
           </template>
@@ -88,6 +89,12 @@
   import { defineComponent } from "vue";
   import { type StudentItem } from "~/models/general";
   import { getDormitoryInfo } from "~/services/personServ";
+  import { message, messageConform } from "~/tools/messageBox";
+  import { getStudentPageData, studentDelete } from "~/services/personServ";
+  import router from "~/router";
+
+
+
   export default defineComponent({
     data () {
       return {
@@ -117,22 +124,27 @@
         }
       },
 
+      //编辑学生信息
       async editItem(studentId : number) {
-        // 获取路由参数
-        const res = this.$route.query.dormitoryId;
-        console.log('获取的宿舍ID:', res);
-        if (res != null) {
-         this.dormitoryId = parseInt(res.toString())
-        }
-
-        // 获取信息
-        if (this.dormitoryId != null) {
-          this.dataList = await getDormitoryInfo(this.dormitoryId)
-          console.log('获取的数据列表:', this.dataList);
-        }
+        router.push({
+        path: "/StudentInfo",
+        // 传递参数
+        query: { studentId: studentId },
+      });
       },
       
+      //删除学生信息
       async deleteItem(studentId :number) {
+        const result = await messageConform("确认删除学生吗?");
+        if (!result) {
+          return;
+        }
+        const res = await studentDelete(studentId);
+        if (res.code == 0) {
+          message(this, "删除成功");
+        } else {
+          message(this, res.msg);
+        }
 
       },
 
