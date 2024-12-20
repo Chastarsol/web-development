@@ -269,3 +269,27 @@ export interface DormitoryItem {
   
   //count: string;//宿舍人数
 }
+
+//请假信息实体类
+export interface LeaveItem {
+  leaveId : number
+  reason : string
+  studentId : number
+  teacherId : number
+  teacherName : string
+  studentName : string
+  status : number
+}
+
+//科研实体类
+export interface ResearchItem {
+  researchId:number
+  teamName: string
+  teacherName:string
+  s1Name:string
+  s2Name:string
+  s3Name:string
+  s4Name:string
+  headLine:string
+  content :string
+}

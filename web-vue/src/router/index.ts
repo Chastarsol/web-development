@@ -118,6 +118,36 @@ const routes = [
     name: "CompetitionTable",
     component: () => import("~/views/teaching/CompetitionTable.vue"),
   },
+  //学生服务
+  {
+    path: "/student-serve-panel",
+    name: "StudentServeTable",
+    component: () => import("~/views/studentServe/StudentServeTable.vue"),
+  },
+  //学生发送请假请求页面
+  {
+    path: "/leave",
+    name: "StudentLeave",
+    component: () => import("~/views/studentServe/StudentLeave.vue"),
+  },
+  //学生查看请假记录
+  {
+    path: "/leaveRecord",
+    name: "StudentLeaveRecord",
+    component: () => import("~/views/studentServe/StudentLeaveRecord.vue"),
+  },
+  //老师：请假管理
+  {
+    path: "/leave-manage-panel-teacher",
+    name: "TeacherLeaveManage",
+    component: () => import("~/views/studentServe/TeacherLeaveManage.vue"),
+  },
+  //管理员：请假管理
+  {
+    path: "/leave-manage-panel-admin",
+    name: "AdminLeaveManage",
+    component: () => import("~/views/studentServe/AdminLeaveManage.vue"),
+  },
 ];
 //路由创建
 const router = createRouter({

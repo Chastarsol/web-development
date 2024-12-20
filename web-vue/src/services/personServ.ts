@@ -4,7 +4,8 @@ import {
   type StudentItem,
   type FamilyMemberItem,
   type TeacherItem,
-  DormitoryItem,
+  type LeaveItem,
+  type DormitoryItem,
 } from "~/models/general";
 //获取学生列表分页数据后台数据请求方法
 export async function getStudentPageData(
@@ -135,4 +136,44 @@ export async function dormitoryEditSave(form: DormitoryItem): Promise<DataRespon
     form: form,
   });
   return res as DataResponse;
+}
+
+//新增请假记录
+export async function postLeaveRequest(form: LeaveItem): Promise<DataResponse>  {
+  const res = await generalRequest("/api/student/postLeaveRequest", {
+    form: form,
+  });
+  return res as DataResponse;
+}
+//查询当前登录学生的请假记录
+export async function studentGetLeaveRecord(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/student/studentGetLeaveRecord", {
+    userId: userId,
+  });
+  return res.data as [];
+}
+
+
+//老师同意或拒绝某一请假记录
+export async function editLeaveItem(form: LeaveItem): Promise<DataResponse>  {
+  const res = await generalRequest("/api/student/editLeaveItem", {
+    form: form,
+  });
+  return res as DataResponse;
+}
+
+//老师查询学生的请假记录
+export async function teacherGetLeaveRecord(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/student/teacherGetLeaveRecord", {
+    userId: userId,
+  });
+  return res.data as [];
+}
+
+//管理员查询学生的请假记录
+export async function adminGetLeaveRecord(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/student/adminGetLeaveRecord", {
+    userId: userId ,
+  });
+  return res.data as [];
 }

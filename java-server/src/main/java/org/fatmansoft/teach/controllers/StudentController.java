@@ -357,6 +357,10 @@ public class StudentController {
         if (!sOp.isPresent())
             return CommonMethod.getReturnMessageError("学生不存在！");
         Student s = sOp.get();
+
+        System.out.println(s);
+        System.out.println("yes");
+
         Map info = studentService.getMapFromStudent(s);  // 查询学生信息Map对象
         List<Score> sList = scoreRepository.findByStudentStudentId(s.getStudentId()); //获得学生成绩对象集合
         Map data = new HashMap();

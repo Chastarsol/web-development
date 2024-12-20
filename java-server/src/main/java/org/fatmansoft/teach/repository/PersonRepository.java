@@ -13,4 +13,10 @@ import java.util.Optional;
  */
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     Optional<Person> findByNum(String num);
+
+    @Query(value = "from Person d where d.name = ?1")
+    Person findPersonByName(String Name);
+
+    @Query(value = "from Person d where d.personId = ?1")
+    Person findPersonById(Integer id);
 }

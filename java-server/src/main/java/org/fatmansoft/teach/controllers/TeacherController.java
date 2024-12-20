@@ -166,16 +166,37 @@ public class TeacherController {
         return CommonMethod.getReturnData(s.getTeacherId());  // 将studentId返回前端
     }
 
-    @PostMapping("")
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public DataResponse getTeacherIntroduceData(@Valid @RequestBody DataRequest dataRequest) {
-       Integer teacherId = dataRequest.getInteger("teacherId");
-        Optional<Teacher> sOp = teacherRepository.findTeacherListById(teacherId);  // 查询获得 Student对象
-        if (!sOp.isPresent())
-            return CommonMethod.getReturnMessageError("老师不存在！");
-        Teacher t = sOp.get();
+//    @PostMapping("/getTeacherIntroduceData")
+//    @PreAuthorize("hasRole('ROLE_TEACHER')")
+//    public DataResponse getTeacherIntroduceData(@Valid @RequestBody DataRequest dataRequest) {
+//       Integer teacherId = dataRequest.getInteger("teacherId");
+//        System.out.println(teacherId);
+//        Optional<Teacher> sOp = teacherRepository.findTeacherListById(teacherId);  // 查询获得 Student对象
+//        if (!sOp.isPresent())
+//            return CommonMethod.getReturnMessageError("老师不存在！");
+//        Teacher t = sOp.get();
+//
+//        System.out.println(t);
+//        return CommonMethod.getReturnData(t);//将前端所需数据保留Map对象里，返还前端
+//    }
+@PostMapping("/getTeacherIntroduceData")
+@PreAuthorize("hasRole('ROLE_TEACHER')")
+public DataResponse getTeacherIntroduceData(@Valid @RequestBody DataRequest dataRequest) {
 
-        return CommonMethod.getReturnData(t);//将前端所需数据保留Map对象里，返还前端
+    Integer teacherId = 1;
+
+    System.out.println(teacherId);
+    Optional<Teacher> sOp = teacherRepository.findTeacherListById(teacherId);  // 查询获得 Teacher对象
+    if (!sOp.isPresent()) {
+        return CommonMethod.getReturnMessageError("老师不存在！");
     }
+    Teacher t = sOp.get();
+
+    System.out.println(t);
+    return CommonMethod.getReturnData(t); // 将前端所需数据保留在Map对象里，返回前端
+}
+
+
+
 
 }

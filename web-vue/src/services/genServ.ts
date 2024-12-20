@@ -9,7 +9,8 @@ export async function generalRequest(
     url,
     {
       data: data,
-    },
+     },
+    
     {
       headers: getAuthHeader(),
     }

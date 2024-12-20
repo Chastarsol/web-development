@@ -1,5 +1,8 @@
 import { generalRequest, uploadRequest } from "~/services/genServ";
 import { type DataResponse } from "~/models/general";
+import axios, { type RawAxiosRequestHeaders } from "axios";
+import { useAppStore } from "~/stores/app";
+import { downloadPost, getAuthHeader } from "~/services/genServ";
 //修改口令后台数据请求方法
 export async function updatePassword(data: Object): Promise<DataResponse> {
   const res = await generalRequest("/api/base/updatePassword", data);
@@ -35,3 +38,14 @@ export async function uploadPhoto(remoteFile: string, file: any): Promise<any> {
   );
   return res as DataResponse;
 }
+//获取老师个人简介信息后台数据请求方法
+export async function getTeacherIntroduceData(
+  teacherId: number | null
+): Promise<DataResponse> {
+  const res = await generalRequest("/api/teacher/getTeacherIntroduceData", {
+    teacherId: teacherId,
+  });
+  console.log(res)
+  return res as DataResponse;
+}
+

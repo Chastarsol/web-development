@@ -104,6 +104,7 @@ import { getTeacherInfo, teacherEditSave } from "~/services/personServ";
 import { defineComponent } from "vue";
 import router from "~/router";
 import { type OptionItem, type TeacherItem } from "~/models/general";
+import { useAppStore } from "~/stores/app";
 
 export default defineComponent({
   // 双向绑定数据
@@ -125,14 +126,12 @@ export default defineComponent({
   // 页面加载函数
   async created() {
     // 获取路由参数
-    const res = this.$route.query.teacherId;
-    if (res != null) {
-      this.teacherId = parseInt(res.toString());
-    }
+    //this.userId = useAppStore().userInfo.id
+    
     // 获取教师信息
-    if (this.teacherId != null) {
-      this.form = await getTeacherInfo(this.teacherId);
-    }
+    this.form = await getTeacherInfo(this.teacherId);
+      
+    
   },
   methods: {
     // 提交表单

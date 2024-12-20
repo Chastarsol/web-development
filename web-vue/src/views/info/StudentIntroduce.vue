@@ -148,6 +148,7 @@ export default defineComponent({
     emailRules: [],
   }),
   async created() {
+    console.log(this.studentId)
     let res = await getStudentIntroduceData(this.studentId);
     this.info = res.data.info;
     this.studentId = this.info.studentId;
