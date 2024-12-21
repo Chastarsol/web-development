@@ -172,6 +172,18 @@ const routes = [
     name: "CourseStudent",
     component: () => import("~/views/studentServe/CourseStudent.vue"),
   },
+  //查看学生选课记录
+  {
+    path: "/CourseStudentInfo",
+    name: "CourseStudentInfo",
+    component: () => import("~/views/studentServe/CourseStudentInfo.vue"),
+  },
+  //老师查看教授课程
+  {
+    path: "/course-teacher",
+    name: "CourseTeacher",
+    component: () => import("~/views/studentServe/CourseTeacher.vue"),
+  },
 ];
 //路由创建
 const router = createRouter({

@@ -2,7 +2,7 @@
     <div class="base_form">
       <div class="base_header">
         <div class="blue_column"></div>
-        <div class="base_title">请假记录</div>
+        <div class="base_title">选课结果</div>
       </div>
 
       <el-table :data="dataList" border style="width: 100%">
@@ -11,34 +11,19 @@
             {{ scope.$index + 1 }}
           </template>
         </el-table-column>
-
-        <el-table-column label="学生姓名" color="black" align="center">
+        
+        <el-table-column label="课程名称" color="black" align="center">
           <template v-slot="scope">
-            {{ scope.row.studentName }}
+            {{ scope.row.courseName }}
           </template>
         </el-table-column>
-
         <el-table-column label="老师姓名" color="black" align="center">
           <template v-slot="scope">
             {{ scope.row.teacherName }}
           </template>
         </el-table-column>
 
-        <el-table-column label="请假理由" color="black" align="center">
-          <template v-slot="scope">
-            {{ scope.row.reason }}
-          </template>
-        </el-table-column>
 
-        <el-table-column label="请假状态" color="black" align="center">
-          <template v-slot="scope">
-            <span v-if="scope.row.status === 0">待处理</span>
-            <span v-if="scope.row.status === 1">通过</span>
-            <span v-if="scope.row.status === 2">未批准</span>
-          </template>
-        </el-table-column>
-    
-     
     </el-table>
 
     </div>
@@ -46,18 +31,18 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import router from "~/router";
-  import { LeaveItem } from "~/models/general";
-  import { adminGetLeaveRecord } from "~/services/personServ";
+  
+  import { CourseStudentItem, LeaveItem } from "~/models/general";
+  import { useAppStore } from "~/stores/app";
+  import { getCourseStudent } from "~/services/personServ";
 
   export default defineComponent({
     data() {
       return {
         userId : 0 as number,
-        dataList: [] as LeaveItem[]
+        dataList: [] as CourseStudentItem[]
       };
     },
-
     created() {
       const res = this.$route.query.userId;
       if (res!= null) {
@@ -65,13 +50,12 @@
       }
       this.queryAll(this.userId);
     },
-
     methods : {
-        async queryAll(userId : number | null) {
-          this.dataList = await adminGetLeaveRecord(this.userId);
-        },
-        
-
-    },
-});
+        async queryAll(userId : number) {
+            if (userId!= null) {
+                this.dataList = await getCourseStudent(userId);
+            }
+        }
+    }
+  });
 </script>

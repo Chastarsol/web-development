@@ -88,11 +88,11 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://localhost:9090",
+        target: "http://localhost:8080",
         // target: "http://202.194.14.120:9090",
       },
       "/auth": {
-        target: "http://localhost:9090",
+        target: "http://localhost:8080",
         // target: "http://202.194.14.120:9090",
       },
     },

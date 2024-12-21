@@ -7,6 +7,7 @@ import {
   type LeaveItem,
   type DormitoryItem,
   ResearchItem,
+  CourseStudentItem,
 } from "~/models/general";
 //获取学生列表分页数据后台数据请求方法
 export async function getStudentPageData(
@@ -224,6 +225,51 @@ export async function getResearchInfoByResearchId(researchId: number): Promise<R
 //管理员查询所有科研项目
 export async function adminGetResearch(userId: number): Promise<[]>  {
   const res = await generalRequest("/api/research/adminGetResearch", {
+    userId: userId,
+  });
+  return res.data as [];
+}
+
+//学生显示所有的课程信息
+export async function getCourseListStudent(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/course/getCourseListStudent", {
+    userId: userId ,
+  });
+  return res.data as [];
+}
+
+//学生选课
+export async function courseStudentAdd(
+  courseName: string,
+  userId: number,
+): Promise<DataResponse> {
+  const res = await generalRequest("/api/courseStudent/courseStudentAdd", {
+    courseName: courseName,
+    userId: userId,
+  });
+  return res as DataResponse;
+}
+
+//学生退选
+export async function courseStudentDelete(courseName: string,userId: number,): Promise<DataResponse>  {
+  const res = await generalRequest("/api/courseStudent/courseStudentDelete", {
+    courseName: courseName,
+    userId: userId,
+  });
+  return res as DataResponse;
+}
+
+//根据学生Id查询选课信息
+export async function getCourseStudent(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/courseStudent/getCourseStudent", {
+    userId: userId,
+  });
+  return res.data as [];
+}
+
+//根据老师Id查询选课信息
+export async function getCourseTeacher(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/courseStudent/getCourseTeacher", {
     userId: userId,
   });
   return res.data as [];

@@ -104,4 +104,11 @@ public class CourseController {
         }
         return CommonMethod.getReturnMessageOK();
     }
+
+    @PostMapping("/getCourseListStudent")
+    @PreAuthorize("hasRole('ROLE_TEACHER') or hasRole('ROLE_STUDENT')")
+    public DataResponse getAllCourse(@Valid @RequestBody DataRequest dataRequest) {
+        List<Course> dataList = courseRepository.findAll();
+        return CommonMethod.getReturnData(dataList);
+    }
 }

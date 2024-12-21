@@ -1,4 +1,9 @@
+
 package org.fatmansoft.teach.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +18,9 @@ import java.io.Serializable;
  * Integer credit 学分
  * Course preCourse 前序课程 pre_course_id 关联前序课程的主键 course_id
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(	name = "course",
         uniqueConstraints = {
@@ -33,6 +41,7 @@ public class Course implements Serializable {
     private Course preCourse;
     @Size(max = 12)
     private String coursePath;
+    private String teacherName;
 
     public Integer getCourseId() {
         return courseId;
@@ -82,3 +91,5 @@ public class Course implements Serializable {
         this.coursePath = coursePath;
     }
 }
+
+

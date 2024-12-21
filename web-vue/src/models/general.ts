@@ -133,16 +133,7 @@ export interface StudentItem {
   address: string;
   dormitoryId: number;
 }
-//用于课程数据信息的定义
-export interface CourseItem {
-  courseId: number;
-  num: string;
-  name: string;
-  credit: number;
-  coursePath: string;
-  preCourse: string;
-  preCourseId: number;
-}
+
 //用于成绩数据信息的定义
 export interface ScoreItem {
   scoreId: number;
@@ -292,4 +283,27 @@ export interface ResearchItem {
   s4Name:string
   headline:string
   content :string
+}
+
+//用于课程数据信息的定义
+export interface CourseItem {
+  courseId: number;
+  num: string;
+  name: string;
+  credit: number;
+  coursePath: string;
+  preCourse: string;
+  preCourseId: number;
+  teacherName: string;
+}
+
+//选课实体类
+export interface CourseStudentItem {
+  courseStudentId :number
+  courseId : number
+  studentUserId: number
+  teacherUserId: number
+  courseName : string
+  studentName: string
+  teacherName: string
 }
