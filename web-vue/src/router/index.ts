@@ -166,6 +166,12 @@ const routes = [
     name: "AdminResearchTable",
     component: () => import("~/views/teaching/AdminResearchTable.vue"),
   },
+  //学生选课
+  {
+    path: "/course-student",
+    name: "CourseStudent",
+    component: () => import("~/views/studentServe/CourseStudent.vue"),
+  },
 ];
 //路由创建
 const router = createRouter({
