@@ -6,6 +6,7 @@ import {
   type TeacherItem,
   type LeaveItem,
   type DormitoryItem,
+  ResearchItem,
 } from "~/models/general";
 //获取学生列表分页数据后台数据请求方法
 export async function getStudentPageData(
@@ -174,6 +175,56 @@ export async function teacherGetLeaveRecord(userId: number): Promise<[]>  {
 export async function adminGetLeaveRecord(userId: number): Promise<[]>  {
   const res = await generalRequest("/api/student/adminGetLeaveRecord", {
     userId: userId ,
+  });
+  return res.data as [];
+}
+
+//老师查询科研项目
+export async function teacherGetResearch(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/research/teacherGetResearch", {
+    userId: userId,
+  });
+  return res.data as [];
+}
+
+//学生查询科研项目
+export async function studentGetResearch(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/research/studentGetResearch", {
+    userId: userId,
+  });
+  return res.data as [];
+}
+
+//删除科研项目
+export async function researchDelete(researchId: number): Promise<DataResponse>  {
+  const res = await generalRequest("/api/research/researchDelete", {
+    researchId: researchId,
+  });
+  return res as DataResponse;
+}
+
+//保存科研项目基本信息后台数据请求方法
+export async function researchEditSave(
+  form: ResearchItem
+): Promise<DataResponse> {
+  const res = await generalRequest("/api/research/researchEditSave", {
+    form: form,
+  });
+  return res as DataResponse;
+}
+
+//根据Id查询科研项目
+export async function getResearchInfoByResearchId(researchId: number): Promise<ResearchItem>  {
+  const res = await generalRequest("/api/research/getResearchInfoByResearchId", {
+    researchId: researchId,
+  });
+  return res.data as ResearchItem;
+}
+
+//管理员查询所有科研项目
+export async function adminGetResearch(userId: number): Promise<[]>  {
+  const res = await generalRequest("/api/research/adminGetResearch", {
+    userId: userId,
   });
   return res.data as [];
 }

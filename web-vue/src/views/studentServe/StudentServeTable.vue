@@ -6,6 +6,7 @@
       </div>
       <button class="leave-button" @click="goToLeavePage">请假</button>
       <button class="leave-button" @click="goToLeaveRecordPage(userId)">查看请假记录</button>
+      <button class="leave-button" @click="goToResearchPage(userId)">查看科研项目</button>
     </div>
 </template>
   
@@ -36,6 +37,13 @@
         },
 
         )
+      },
+      goToResearchPage(userId : number) {
+        router.push({
+          path: "/research-panel-student",
+          query: {userId : userId}
+        },
+      )
       }
 
 

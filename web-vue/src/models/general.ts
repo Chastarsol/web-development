@@ -290,6 +290,6 @@ export interface ResearchItem {
   s2Name:string
   s3Name:string
   s4Name:string
-  headLine:string
+  headline:string
   content :string
 }

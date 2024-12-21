@@ -23,7 +23,7 @@ public class Research {
     private String s2Name;
     private String s3Name;
     private String s4Name;
-    private String headLine;
+    private String headline;
     private String content;
 
 }

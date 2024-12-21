@@ -148,6 +148,30 @@ const routes = [
     name: "AdminLeaveManage",
     component: () => import("~/views/studentServe/AdminLeaveManage.vue"),
   },
+  //老师：科研管理
+  {
+    path: "/research-panel-teacher",
+    name: "TeacherResearchTable",
+    component: () => import("~/views/teaching/TeacherResearchTable.vue"),
+  },
+  //科研信息
+  {
+    path: "/researchInfo",
+    name: "ResearchInfo",
+    component: () => import("~/views/teaching/ResearchInfo.vue"),
+  },
+  //学生：科研管理
+  {
+    path: "/research-panel-student",
+    name: "StudentResearchTable",
+    component: () => import("~/views/studentServe/StudentResearchTable.vue"),
+  },
+  //管理员：科研管理
+  {
+    path: "/researchPanelAdmin",
+    name: "AdminResearchTable",
+    component: () => import("~/views/teaching/AdminResearchTable.vue"),
+  },
 ];
 //路由创建
 const router = createRouter({
