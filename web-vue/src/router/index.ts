@@ -118,12 +118,6 @@ const routes = [
     name: "CompetitionTable",
     component: () => import("~/views/teaching/CompetitionTable.vue"),
   },
-  //学生服务
-  {
-    path: "/student-serve-panel",
-    name: "StudentServeTable",
-    component: () => import("~/views/studentServe/StudentServeTable.vue"),
-  },
   //学生发送请假请求页面
   {
     path: "/leave",
